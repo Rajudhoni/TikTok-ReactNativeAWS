@@ -9,14 +9,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 const index = (props) => {
-    console.log("props...", props);
+   
     const [post, setPost] = useState(props.post.item);
     const [isLiked, setIsLiked] = useState(false);
 
     const [paused, setPaused] = useState(false);
 
 
-    
+    console.log("aws props...", post);
 
 
     const onPlayPausePress = ()=> {
@@ -71,16 +71,16 @@ const index = (props) => {
                 <View style={styles.bottomContainer}>
 
                     <View>
-                        <Text style={styles.handle}>@{post.user.username}</Text>
+                        <Text style={styles.handle}>@{post.user.userName}</Text>
                         <Text style={styles.description}>{post.description}</Text>
                         <View style={styles.songRow}>
                             <Entypo name={'beamed-note'} size={24} color='white' />
                             <Text style={styles.songName} >
-                                {post.songName}
+                                {post.song.name}
                             </Text>
                         </View>
                     </View>
-                    <Image style={styles.songImage} source={{uri: post.songImage}} />
+                    <Image style={styles.songImage} source={{uri: post.song.imageUri}} />
 
                 </View>
             </View>

@@ -1,12 +1,35 @@
-import React from 'react'
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, {useState, useEffect} from 'react'
 import { View, Text, FlatList,Dimensions} from 'react-native';
 import Post from '../../components/Post';
-import posts from '../../assets/data/posts';
+
+
+
+import {listPosts} from '../../graphql/queries'
+
+import {API, graphqlOperation} from 'aws-amplify';
+
 
 
 
 
 const index = () => {
+    const [posts, setPosts] = useState([]);
+
+
+    useEffect(()=> {
+        const fetchPost = async () => {
+            try{
+                const response = await API.graphql(graphqlOperation(listPosts));
+                setPosts(response.data.listPosts.items)
+            }catch(e){
+                console.log(e);
+            }
+        }
+
+        fetchPost();
+    }, []);
+
     return (
         <View>
             
