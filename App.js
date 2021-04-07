@@ -6,6 +6,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import 'react-native-gesture-handler';
 import RootNavigation from './src/navigation';
 
+import { withAuthenticator } from 'aws-amplify-react-native'
+
 const App = () => {
   return (
     <>
@@ -19,4 +21,4 @@ const App = () => {
   )
 }
 
-export default App
+export default withAuthenticator(App);
