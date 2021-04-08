@@ -8,13 +8,15 @@ import {
   Dimensions,
 } from 'react-native';
 import {RNCamera} from 'react-native-camera';
+import { useNavigation } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
 const CameraPage = props => {
     const [isRecording, setRecording] = useState(false);
     const camera = useRef();
-  
+    const navigation = useNavigation();
+
   const onRecord = async () => {
       if(isRecording){
           camera.current.stopRecording();
@@ -22,6 +24,8 @@ const CameraPage = props => {
          
           const data = await camera.current.recordAsync();
           console.log("Recording Data: ", data);
+          navigation.navigate("CreatePost", {videoUri: data.uri});
+
       }
     
   };
