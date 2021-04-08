@@ -9,7 +9,7 @@ export default [
     },
     description: 'hahahah oh boy @borat',
     songName: 'NF - The search',
-    songImage: 'https://influencermarketinghub.com/wiki/wp-content/uploads/2020/08/1657369265111046_c5_720x720.jpeg',
+    songImage: ' ',
     likes: 123,
     comments: 12,
     shares: 44,
