@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, {useState} from 'react'
-import { View, Text, Image, StyleSheet, Dimensions, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet,Platform, Dimensions, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import Video from 'react-native-video';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Fontisto from 'react-native-vector-icons/Fontisto';
+
+
+const {width, height} = Dimensions.get('window');
 
 const index = (props) => {
    
@@ -95,7 +98,8 @@ export default index
 const styles = StyleSheet.create({
     container: {
         width: '100%', 
-        height: Dimensions.get('window').height - 130
+        height: Platform.OS === 'ios' ? height - 130 : height - 50
+        // Dimensions.get('window').height - 130
     },
     video: {
         position: 'absolute',
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     uiContainer: {
         height: '100%',
         justifyContent: 'flex-end',
-        
+     
     },
 
     bottomContainer: {
