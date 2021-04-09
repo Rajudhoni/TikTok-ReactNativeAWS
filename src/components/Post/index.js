@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { View, Text, Image, StyleSheet,Platform, Dimensions, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import Video from 'react-native-video';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Fontisto from 'react-native-vector-icons/Fontisto';
+
+import {Storage} from 'aws-amplify';
 
 
 const {width, height} = Dimensions.get('window');
@@ -17,6 +19,7 @@ const index = (props) => {
     const [isLiked, setIsLiked] = useState(false);
 
     const [paused, setPaused] = useState(false);
+    const [vvideouri, setVideoUri] = useState('')
 
 
     console.log("aws props...", post);
@@ -34,7 +37,24 @@ const index = (props) => {
             likes: post.likes + likesToAdd,
         });
         setIsLiked(!isLiked)
-    }
+    };
+
+    const getVideoUri = async () => {
+        if (post.videoUri.startsWith('http')) {
+
+            setVideoUri(post.videoUri);
+        }
+        console.log("post video uri........>", post.videoUri);
+
+        const responsevideoUri = await Storage.get(post.videoUri);
+        setVideoUri(responsevideoUri);
+    };
+
+    useEffect(()=> {
+            getVideoUri();
+    }, []);
+
+    console.log("Video uri : >", vvideouri);
     return (
         <View style={styles.container}>
           <TouchableWithoutFeedback onPress={onPlayPausePress}>  
@@ -43,7 +63,7 @@ const index = (props) => {
 
           
             <Video 
-                source={{uri: post.videoUri}}
+                source={{uri: vvideouri}}
                 style={styles.video}
                 resizeMode="cover"
                 onError={(e) => console.log(e)}

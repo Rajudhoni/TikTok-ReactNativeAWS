@@ -34,11 +34,12 @@ const CameraPage = props => {
       <RNCamera
         ref={camera}
         style={styles.preview}
-        type={RNCamera.Constants.Type.front}
+        type={RNCamera.Constants.Type.back}
         height={height - 120}
 
         onRecordingStart={()=> setRecording(!isRecording)}
         onRecordingEnd={()=> setRecording(!isRecording)}
+        
       />
 
       

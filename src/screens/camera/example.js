@@ -83,6 +83,7 @@ const CameraPage = props => {
           buttonNegative: 'Cancel',
         }}
         height={height}
+        
       />
 
       <View
